@@ -17,7 +17,9 @@ public:
     vector(vector &&obj){}; // move constructor
     vector& operator=(const vector &obj){}; // copy assignment operator
     vector& operator=(vector &&obj){};// move assignment operator
-    ~vector(){}; //destructor
+    ~vector(){
+        delete ptr_;
+    }; //destructor
     T& operator[](const size_t& index){
         return ptr_[index];
     };
