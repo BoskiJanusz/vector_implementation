@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 namespace my
 {
 template<class T>
@@ -18,7 +20,7 @@ public:
     vector& operator=(const vector &obj){}; // copy assignment operator
     vector& operator=(vector &&obj){};// move assignment operator
     ~vector(){
-        delete ptr_;
+        delete []ptr_;
     }; //destructor
     T& operator[](const size_t& index){
         return ptr_[index];
@@ -27,7 +29,17 @@ public:
     T& front(){};
     T& back(){};
     void push_back(const T& obj){
-        ptr_[acctualSize_] = obj;
+        if(acctualSize_ == capacity){
+            capacity *= 2;
+            auto tempPtr = new T[capacity];
+            for(size_t i = 0; i < acctualSize_; ++i){
+                tempPtr[i] = ptr_[i];
+            }
+            delete []ptr_;
+            ptr_ = tempPtr;
+        }
+            ptr_[acctualSize_] = obj;
+            acctualSize_++;
     }; //push_back function
 };
 } // namespace my
