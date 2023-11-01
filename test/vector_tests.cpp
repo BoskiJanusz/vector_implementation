@@ -88,3 +88,114 @@ TEST(VectorTest, StringCopyConstructorTest){
     auto expected = copiedVector[0];
     EXPECT_EQ(value, expected);
 }
+
+TEST(VectorTest, IntCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVectorTest){
+    my::vector<int> vector{};
+    my::vector<int> copiedVector{};
+    copiedVector = vector;
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_NE(value, expected);
+}
+
+TEST(VectorTest, IntCopyAssignmentOperatorOneAssignToItselfVectorTest){
+    my::vector<int> vector{};
+    vector = vector;
+    auto value = vector[0];
+    auto expected = vector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, IntCopyAssignmentOperatorOneAssignEmptyVectorTest){
+    int a{5};
+    my::vector<int> vector{a};
+    my::vector<int> copiedVector{};
+    copiedVector = vector;
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, IntCopyAssignmentOperatorOneAssignNonEmptyVectorTest){
+    int a{5}, b{6};
+    my::vector<int> vector{a};
+    my::vector<int> copiedVector{b};
+    copiedVector = vector;
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, CharCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVectorTest){
+    my::vector<char> vector{};
+    my::vector<char> copiedVector{};
+    copiedVector = vector;
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_NE(value, expected);
+}
+
+TEST(VectorTest, CharCopyAssignmentOperatorOneAssignToItselfVectorTest){
+    my::vector<char> vector{};
+    vector = vector;
+    auto value = vector[0];
+    auto expected = vector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, CharCopyAssignmentOperatorOneAssignEmptyVectorTest){
+    char c = 'c';
+    my::vector<char> vector{c};
+    my::vector<char> copiedVector{};
+    copiedVector = vector;
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, CharCopyAssignmentOperatorOneAssignNonEmptyVectorTest){
+    char c = 'c', d = 'd';
+    my::vector<char> vector{c};
+    my::vector<char> copiedVector{d};
+    copiedVector = vector;
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, StringCopyAssignmentOperatorOneAssignEmptyToEmptyIsEqualVectorTest){
+    my::vector<std::string> vector{};
+    my::vector<std::string> copiedVector{};
+    copiedVector = vector;
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, StringCopyAssignmentOperatorOneAssignToItselfVectorTest){
+    my::vector<std::string> vector{};
+    vector = vector;
+    auto value = vector[0];
+    auto expected = vector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, StringCopyAssignmentOperatorOneAssignEmptyVectorTest){
+    std::string str{"test"};
+    my::vector<std::string> vector{str};
+    my::vector<std::string> copiedVector{};
+    copiedVector = vector;
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, StringCopyAssignmentOperatorOneAssignNonEmptyVectorTest){
+    std::string str1{"test1"}, str2{"test2"};
+    my::vector<std::string> vector{str1};
+    my::vector<std::string> copiedVector{str2};
+    copiedVector = vector;
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
