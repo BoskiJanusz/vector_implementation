@@ -70,8 +70,12 @@ public:
         }
         throw std::out_of_range("Index out of range");
     };
-    T& front(){};
-    T& back(){};
+    T& front(){
+        return ptr_[0];
+    };
+    T& back(){
+        return ptr_[acctualSize_ - 1];
+    };
     void push_back(const T& obj){
         if(acctualSize_ == capacity_){
             capacity_ *= 2;
