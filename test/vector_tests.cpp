@@ -286,3 +286,39 @@ TEST(VectorTest, IntFunctionAtRecieveNotProperIndexOfThreeValues){
     vector.push_back(3);
     ASSERT_THROW(vector.at(3), std::out_of_range);
 }
+
+TEST(VectorTest, IntFunctionFrontReturnsFromOneElement){
+    my::vector<int> vector{};
+    vector.push_back(3);
+    auto value = vector.front();
+    auto expected = 3;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, IntFunctionFrontReturnsFromThreeElements){
+    my::vector<int> vector{};
+    vector.push_back(3);
+    vector.push_back(2);
+    vector.push_back(1);
+    auto value = vector.front();
+    auto expected = 3;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, IntFunctionBackReturnsFromOneElement){
+    my::vector<int> vector{};
+    vector.push_back(3);
+    auto value = vector.back();
+    auto expected = 3;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, IntFunctionBackReturnsFromThreeElements){
+    my::vector<int> vector{};
+    vector.push_back(3);
+    vector.push_back(2);
+    vector.push_back(1);
+    auto value = vector.back();
+    auto expected = 1;
+    EXPECT_EQ(value, expected);
+}
