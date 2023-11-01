@@ -254,3 +254,35 @@ TEST(VectorTest, StringMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest)
     auto expected = "str";
     EXPECT_EQ(value, expected);
 }
+
+TEST(VectorTest, IntFunctionAtRecieveProperIndexOfOneValue){
+    my::vector<int> vector{};
+    vector.push_back(1);
+    auto value = vector.at(0);
+    auto expected = 1;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, IntFunctionAtRecieveProperIndexOfThreeValues){
+    my::vector<int> vector{};
+    vector.push_back(1);
+    vector.push_back(2);
+    vector.push_back(3);
+    auto value = vector.at(2);
+    auto expected = 3;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, IntFunctionAtRecieveNotProperIndexOfOneValue){
+    my::vector<int> vector{};
+    vector.push_back(1);
+    ASSERT_THROW(vector.at(1), std::out_of_range);
+}
+
+TEST(VectorTest, IntFunctionAtRecieveNotProperIndexOfThreeValues){
+    my::vector<int> vector{};
+    vector.push_back(1);
+    vector.push_back(2);
+    vector.push_back(3);
+    ASSERT_THROW(vector.at(3), std::out_of_range);
+}
