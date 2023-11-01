@@ -199,3 +199,30 @@ TEST(VectorTest, StringCopyAssignmentOperatorOneAssignNonEmptyVectorTest){
     auto expected = copiedVector[0];
     EXPECT_EQ(value, expected);
 }
+
+TEST(VectorTest, IntMoveConstructorTest){
+    int a{5};
+    my::vector<int> vector{a};
+    auto copiedVector {std::move(vector)};
+    auto value = 5;
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, CharMoveConstructorTest){
+    char c = 'c';
+    my::vector<char> vector{c};
+    auto copiedVector {std::move(vector)};
+    auto value = 'c';
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, StringMoveConstructorTest){
+    std::string str{"test"};
+    my::vector<std::string> vector{str};
+    auto copiedVector {std::move(vector)};
+    auto value = "test";
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
