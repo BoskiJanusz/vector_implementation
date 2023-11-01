@@ -47,7 +47,16 @@ public:
         }
         return *this;
     }; // copy assignment operator
-    vector& operator=(vector &&obj){};// move assignment operator
+    vector& operator=(vector &&obj){
+        if (this != &obj){
+            delete[] ptr_;
+            ptr_ = obj.ptr_;
+            capacity_ = obj.capacity_;
+            acctualSize_ = obj.acctualSize_;
+            obj.ptr_ = nullptr;
+        }
+        return *this;
+    };// move assignment operator
     ~vector(){
         delete []ptr_;
     }; //destructor
