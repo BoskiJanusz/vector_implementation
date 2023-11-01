@@ -62,5 +62,29 @@ TEST(VectorTest, StringThreeValueIntoVectorTest){
     EXPECT_EQ(value, expected);
 }
 
+TEST(VectorTest, IntCopyConstructorTest){
+    int a{5};
+    my::vector<int> vector{a};
+    auto copiedVector {vector};
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
 
+TEST(VectorTest, CharCopyConstructorTest){
+    char c = 'c';
+    my::vector<char> vector{c};
+    auto copiedVector {vector};
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
 
+TEST(VectorTest, StringCopyConstructorTest){
+    std::string str{"test"};
+    my::vector<std::string> vector{str};
+    auto copiedVector {vector};
+    auto value = vector[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
