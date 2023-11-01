@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <exception>
 
 namespace my
 {
@@ -63,7 +64,12 @@ public:
     T& operator[](const size_t& index){
         return ptr_[index];
     };
-    T& at(const size_t& index){};
+    T& at(const size_t& index){
+        if(index < acctualSize_){
+            return ptr_[index];
+        }
+        throw std::out_of_range("Index out of range");
+    };
     T& front(){};
     T& back(){};
     void push_back(const T& obj){
