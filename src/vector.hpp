@@ -30,7 +30,18 @@ public:
         }
     }; // copy constructor
     vector(vector &&obj){}; // move constructor
-    vector& operator=(const vector &obj){}; // copy assignment operator
+    vector& operator=(const vector &obj){
+        if(this != &obj){
+            delete []ptr_;
+            capacity_ = obj.capacity_;
+            acctualSize_ = obj.acctualSize_;
+            ptr_ = new T[capacity_];
+            for(size_t i = 0; i < acctualSize_; ++i){
+                ptr_[i] = obj.ptr_[i];
+            }
+        }
+        return *this;
+    }; // copy assignment operator
     vector& operator=(vector &&obj){};// move assignment operator
     ~vector(){
         delete []ptr_;
