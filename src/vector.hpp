@@ -29,7 +29,12 @@ public:
             ptr_[i] = obj.ptr_[i];
         }
     }; // copy constructor
-    vector(vector &&obj){}; // move constructor
+    vector(vector &&obj){
+        acctualSize_ = obj.acctualSize_;
+        capacity_ = obj.capacity_;
+        ptr_ = obj.ptr_;
+        obj.ptr_ = nullptr;        
+    }; // move constructor
     vector& operator=(const vector &obj){
         if(this != &obj){
             delete []ptr_;
