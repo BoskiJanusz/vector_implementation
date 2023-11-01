@@ -226,3 +226,31 @@ TEST(VectorTest, StringMoveConstructorTest){
     auto expected = copiedVector[0];
     EXPECT_EQ(value, expected);
 }
+
+
+TEST(VectorTest, IntMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest){
+    my::vector<int> vector{5};
+    my::vector<int> copiedVector{};
+    copiedVector = std::move(vector);
+    auto value = copiedVector[0];
+    auto expected = 5;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, CharMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest){
+    my::vector<char> vector{'c'};
+    my::vector<char> copiedVector{};
+    copiedVector = std::move(vector);
+    auto value = copiedVector[0];
+    auto expected = 'c';
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorTest, StringMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest){
+    my::vector<std::string> vector{"str"};
+    my::vector<std::string> copiedVector{};
+    copiedVector = std::move(vector);
+    auto value = copiedVector[0];
+    auto expected = "str";
+    EXPECT_EQ(value, expected);
+}
