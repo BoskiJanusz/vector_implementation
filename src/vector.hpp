@@ -11,7 +11,7 @@ class vector
 private:
     T* ptr_ = nullptr;
     size_t acctualSize_ = 0;
-    size_t capacity_ = 2;
+    size_t capacity_ = 1;
 public:
     vector(){
         ptr_ = new T[capacity_];
