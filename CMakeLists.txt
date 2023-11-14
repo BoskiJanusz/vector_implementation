@@ -3,6 +3,11 @@ project(my_vector VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(TEST_SOURCES
+    test/vector_tests.cpp
+    test/vector_bool_tests.cpp  # Dodaj swoje pliki testowe tutaj
+)
+
 set(FLAGS -Wall -Wextra -Wpedantic -std=c++2a)
 
 include(FetchContent)
@@ -21,7 +26,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 
 enable_testing()
 
-add_executable(${PROJECT_NAME}-ut test/vector_tests.cpp )
+add_executable(${PROJECT_NAME}-ut ${TEST_SOURCES} )
 target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})
 
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
