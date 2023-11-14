@@ -6,6 +6,7 @@ TEST(VectorTest, IntOneValueIntoVectorTest){
     my::vector<int> v{};
     int a = 5;
     v.push_back(a);
+    std::cout << v[0] << "<---------------TUTAJ CYCE (.)(.)";
     auto value = v[0];
     auto expected = 5;
     EXPECT_EQ(value, expected);
