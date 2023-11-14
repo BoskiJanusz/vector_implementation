@@ -90,4 +90,41 @@ public:
             acctualSize_++;
     }; //push_back function
 };
+template<>
+class vector<bool>{
+    u_int64_t* ptr_ = nullptr;
+    size_t acctualSize_ = 0;
+    size_t capacity_ = 1;
+public:
+    vector(){
+        ptr_ = new u_int64_t[capacity_];
+    };
+    vector(const vector &obj){};
+    vector(vector &&obj){};
+    vector& operator=(const vector &obj){};
+    vector& operator=(vector &&obj){};
+    ~vector(){};
+    void push_back(bool obj){
+        if(acctualSize_ == capacity_ * 64){
+            capacity_ *= 2;
+            auto tempPtr = new u_int64_t[capacity_];
+            for(size_t i = 0; i < acctualSize_; ++i){
+                tempPtr[i] = ptr_[i];
+            }
+            delete []ptr_;
+            ptr_ = tempPtr;
+        }
+            if(obj){
+                ptr_[acctualSize_] = ptr_[acctualSize_] << 1;
+                ptr_[acctualSize_] |= (1 << 0);
+            }
+            else{
+                ptr_[acctualSize_] = ptr_[acctualSize_] << 1;
+            }
+    };
+    bool operator[](const size_t& index){
+        return ((ptr_[index / 64] >> (index % 64)) & 1) != 0;
+    };
+    bool& at(const size_t& index){};
+};
 } // namespace my
