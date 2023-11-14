@@ -2,7 +2,7 @@
 #include <string>
 #include "../src/vector.hpp"
 
-TEST(VectorBoolTest, OneValueIntoVectorTest){
+TEST(VectorBoolTest, OneValueIntoVectorTest) {
     my::vector<bool> v{};
     bool a = 1;
     v.push_back(a);

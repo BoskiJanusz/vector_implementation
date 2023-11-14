@@ -2,17 +2,16 @@
 #include <string>
 #include "../src/vector.hpp"
 
-TEST(VectorTest, IntOneValueIntoVectorTest){
+TEST(VectorTest, IntOneValueIntoVectorTest) {
     my::vector<int> v{};
     int a = 5;
     v.push_back(a);
-    std::cout << v[0] << "<---------------TUTAJ CYCE (.)(.)";
     auto value = v[0];
     auto expected = 5;
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntThreeValueIntoVectorTest){
+TEST(VectorTest, IntThreeValueIntoVectorTest) {
     my::vector<int> v{};
     int a = 5;
     v.push_back(a);
@@ -23,7 +22,7 @@ TEST(VectorTest, IntThreeValueIntoVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, CharOneValueIntoVectorTest){
+TEST(VectorTest, CharOneValueIntoVectorTest) {
     my::vector<char> v{};
     char c = 't';
     v.push_back(c);
@@ -32,7 +31,7 @@ TEST(VectorTest, CharOneValueIntoVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, CharThreeValueIntoVectorTest){
+TEST(VectorTest, CharThreeValueIntoVectorTest) {
     my::vector<char> v{};
     char c = 't';
     v.push_back(c);
@@ -43,7 +42,7 @@ TEST(VectorTest, CharThreeValueIntoVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, StringOneValueIntoVectorTest){
+TEST(VectorTest, StringOneValueIntoVectorTest) {
     my::vector<std::string> v{};
     std::string str{"test"};
     v.push_back(str);
@@ -52,7 +51,7 @@ TEST(VectorTest, StringOneValueIntoVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, StringThreeValueIntoVectorTest){
+TEST(VectorTest, StringThreeValueIntoVectorTest) {
     my::vector<std::string> v{};
     std::string str{"test"};
     v.push_back(str);
@@ -63,34 +62,34 @@ TEST(VectorTest, StringThreeValueIntoVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntCopyConstructorTest){
+TEST(VectorTest, IntCopyConstructorTest) {
     int a{5};
     my::vector<int> vector{a};
-    auto copiedVector {vector};
+    auto copiedVector{vector};
     auto value = vector[0];
     auto expected = copiedVector[0];
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, CharCopyConstructorTest){
+TEST(VectorTest, CharCopyConstructorTest) {
     char c = 'c';
     my::vector<char> vector{c};
-    auto copiedVector {vector};
+    auto copiedVector{vector};
     auto value = vector[0];
     auto expected = copiedVector[0];
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, StringCopyConstructorTest){
+TEST(VectorTest, StringCopyConstructorTest) {
     std::string str{"test"};
     my::vector<std::string> vector{str};
-    auto copiedVector {vector};
+    auto copiedVector{vector};
     auto value = vector[0];
     auto expected = copiedVector[0];
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVectorTest){
+TEST(VectorTest, IntCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVectorTest) {
     my::vector<int> vector{};
     my::vector<int> copiedVector{};
     copiedVector = vector;
@@ -99,7 +98,7 @@ TEST(VectorTest, IntCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVectorT
     EXPECT_NE(value, expected);
 }
 
-TEST(VectorTest, IntCopyAssignmentOperatorOneAssignToItselfVectorTest){
+TEST(VectorTest, IntCopyAssignmentOperatorOneAssignToItselfVectorTest) {
     my::vector<int> vector{};
     vector = vector;
     auto value = vector[0];
@@ -107,7 +106,7 @@ TEST(VectorTest, IntCopyAssignmentOperatorOneAssignToItselfVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntCopyAssignmentOperatorOneAssignEmptyVectorTest){
+TEST(VectorTest, IntCopyAssignmentOperatorOneAssignEmptyVectorTest) {
     int a{5};
     my::vector<int> vector{a};
     my::vector<int> copiedVector{};
@@ -117,7 +116,7 @@ TEST(VectorTest, IntCopyAssignmentOperatorOneAssignEmptyVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntCopyAssignmentOperatorOneAssignNonEmptyVectorTest){
+TEST(VectorTest, IntCopyAssignmentOperatorOneAssignNonEmptyVectorTest) {
     int a{5}, b{6};
     my::vector<int> vector{a};
     my::vector<int> copiedVector{b};
@@ -127,7 +126,7 @@ TEST(VectorTest, IntCopyAssignmentOperatorOneAssignNonEmptyVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, CharCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVectorTest){
+TEST(VectorTest, CharCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVectorTest) {
     my::vector<char> vector{};
     my::vector<char> copiedVector{};
     copiedVector = vector;
@@ -136,7 +135,7 @@ TEST(VectorTest, CharCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVector
     EXPECT_NE(value, expected);
 }
 
-TEST(VectorTest, CharCopyAssignmentOperatorOneAssignToItselfVectorTest){
+TEST(VectorTest, CharCopyAssignmentOperatorOneAssignToItselfVectorTest) {
     my::vector<char> vector{};
     vector = vector;
     auto value = vector[0];
@@ -144,7 +143,7 @@ TEST(VectorTest, CharCopyAssignmentOperatorOneAssignToItselfVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, CharCopyAssignmentOperatorOneAssignEmptyVectorTest){
+TEST(VectorTest, CharCopyAssignmentOperatorOneAssignEmptyVectorTest) {
     char c = 'c';
     my::vector<char> vector{c};
     my::vector<char> copiedVector{};
@@ -154,7 +153,7 @@ TEST(VectorTest, CharCopyAssignmentOperatorOneAssignEmptyVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, CharCopyAssignmentOperatorOneAssignNonEmptyVectorTest){
+TEST(VectorTest, CharCopyAssignmentOperatorOneAssignNonEmptyVectorTest) {
     char c = 'c', d = 'd';
     my::vector<char> vector{c};
     my::vector<char> copiedVector{d};
@@ -164,7 +163,7 @@ TEST(VectorTest, CharCopyAssignmentOperatorOneAssignNonEmptyVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, StringCopyAssignmentOperatorOneAssignEmptyToEmptyIsEqualVectorTest){
+TEST(VectorTest, StringCopyAssignmentOperatorOneAssignEmptyToEmptyIsEqualVectorTest) {
     my::vector<std::string> vector{};
     my::vector<std::string> copiedVector{};
     copiedVector = vector;
@@ -173,7 +172,7 @@ TEST(VectorTest, StringCopyAssignmentOperatorOneAssignEmptyToEmptyIsEqualVectorT
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, StringCopyAssignmentOperatorOneAssignToItselfVectorTest){
+TEST(VectorTest, StringCopyAssignmentOperatorOneAssignToItselfVectorTest) {
     my::vector<std::string> vector{};
     vector = vector;
     auto value = vector[0];
@@ -181,7 +180,7 @@ TEST(VectorTest, StringCopyAssignmentOperatorOneAssignToItselfVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, StringCopyAssignmentOperatorOneAssignEmptyVectorTest){
+TEST(VectorTest, StringCopyAssignmentOperatorOneAssignEmptyVectorTest) {
     std::string str{"test"};
     my::vector<std::string> vector{str};
     my::vector<std::string> copiedVector{};
@@ -191,7 +190,7 @@ TEST(VectorTest, StringCopyAssignmentOperatorOneAssignEmptyVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, StringCopyAssignmentOperatorOneAssignNonEmptyVectorTest){
+TEST(VectorTest, StringCopyAssignmentOperatorOneAssignNonEmptyVectorTest) {
     std::string str1{"test1"}, str2{"test2"};
     my::vector<std::string> vector{str1};
     my::vector<std::string> copiedVector{str2};
@@ -201,35 +200,34 @@ TEST(VectorTest, StringCopyAssignmentOperatorOneAssignNonEmptyVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntMoveConstructorTest){
+TEST(VectorTest, IntMoveConstructorTest) {
     int a{5};
     my::vector<int> vector{a};
-    auto copiedVector {std::move(vector)};
+    auto copiedVector{std::move(vector)};
     auto value = 5;
     auto expected = copiedVector[0];
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, CharMoveConstructorTest){
+TEST(VectorTest, CharMoveConstructorTest) {
     char c = 'c';
     my::vector<char> vector{c};
-    auto copiedVector {std::move(vector)};
+    auto copiedVector{std::move(vector)};
     auto value = 'c';
     auto expected = copiedVector[0];
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, StringMoveConstructorTest){
+TEST(VectorTest, StringMoveConstructorTest) {
     std::string str{"test"};
     my::vector<std::string> vector{str};
-    auto copiedVector {std::move(vector)};
+    auto copiedVector{std::move(vector)};
     auto value = "test";
     auto expected = copiedVector[0];
     EXPECT_EQ(value, expected);
 }
 
-
-TEST(VectorTest, IntMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest){
+TEST(VectorTest, IntMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest) {
     my::vector<int> vector{5};
     my::vector<int> copiedVector{};
     copiedVector = std::move(vector);
@@ -238,7 +236,7 @@ TEST(VectorTest, IntMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, CharMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest){
+TEST(VectorTest, CharMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest) {
     my::vector<char> vector{'c'};
     my::vector<char> copiedVector{};
     copiedVector = std::move(vector);
@@ -247,7 +245,7 @@ TEST(VectorTest, CharMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, StringMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest){
+TEST(VectorTest, StringMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest) {
     my::vector<std::string> vector{"str"};
     my::vector<std::string> copiedVector{};
     copiedVector = std::move(vector);
@@ -256,7 +254,7 @@ TEST(VectorTest, StringMoveAssignmentOperatorCopiedVectorIsEqualValueVectorTest)
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntFunctionAtRecieveProperIndexOfOneValue){
+TEST(VectorTest, IntFunctionAtRecieveProperIndexOfOneValue) {
     my::vector<int> vector{};
     vector.push_back(1);
     auto value = vector.at(0);
@@ -264,7 +262,7 @@ TEST(VectorTest, IntFunctionAtRecieveProperIndexOfOneValue){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntFunctionAtRecieveProperIndexOfThreeValues){
+TEST(VectorTest, IntFunctionAtRecieveProperIndexOfThreeValues) {
     my::vector<int> vector{};
     vector.push_back(1);
     vector.push_back(2);
@@ -274,13 +272,13 @@ TEST(VectorTest, IntFunctionAtRecieveProperIndexOfThreeValues){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntFunctionAtRecieveNotProperIndexOfOneValue){
+TEST(VectorTest, IntFunctionAtRecieveNotProperIndexOfOneValue) {
     my::vector<int> vector{};
     vector.push_back(1);
     ASSERT_THROW(vector.at(1), std::out_of_range);
 }
 
-TEST(VectorTest, IntFunctionAtRecieveNotProperIndexOfThreeValues){
+TEST(VectorTest, IntFunctionAtRecieveNotProperIndexOfThreeValues) {
     my::vector<int> vector{};
     vector.push_back(1);
     vector.push_back(2);
@@ -288,7 +286,7 @@ TEST(VectorTest, IntFunctionAtRecieveNotProperIndexOfThreeValues){
     ASSERT_THROW(vector.at(3), std::out_of_range);
 }
 
-TEST(VectorTest, IntFunctionFrontReturnsFromOneElement){
+TEST(VectorTest, IntFunctionFrontReturnsFromOneElement) {
     my::vector<int> vector{};
     vector.push_back(3);
     auto value = vector.front();
@@ -296,7 +294,7 @@ TEST(VectorTest, IntFunctionFrontReturnsFromOneElement){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntFunctionFrontReturnsFromThreeElements){
+TEST(VectorTest, IntFunctionFrontReturnsFromThreeElements) {
     my::vector<int> vector{};
     vector.push_back(3);
     vector.push_back(2);
@@ -306,7 +304,7 @@ TEST(VectorTest, IntFunctionFrontReturnsFromThreeElements){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntFunctionBackReturnsFromOneElement){
+TEST(VectorTest, IntFunctionBackReturnsFromOneElement) {
     my::vector<int> vector{};
     vector.push_back(3);
     auto value = vector.back();
@@ -314,7 +312,7 @@ TEST(VectorTest, IntFunctionBackReturnsFromOneElement){
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, IntFunctionBackReturnsFromThreeElements){
+TEST(VectorTest, IntFunctionBackReturnsFromThreeElements) {
     my::vector<int> vector{};
     vector.push_back(3);
     vector.push_back(2);
