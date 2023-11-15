@@ -13,18 +13,18 @@ private:
 
 public:
     vector() {
-        ptr_ = new T[capacity_];
+        ptr_ = new T[capacity_]{};
     };
 
     vector(const T& obj) {
-        ptr_ = new T[capacity_];
+        ptr_ = new T[capacity_]{};
         ptr_[0] = obj;
         acctualSize_++;
     }
     vector(const vector& obj) {
         acctualSize_ = obj.acctualSize_;
         capacity_ = obj.capacity_;
-        ptr_ = new T[capacity_];
+        ptr_ = new T[capacity_]{};
         for (size_t i = 0; i < acctualSize_; ++i) {
             ptr_[i] = obj.ptr_[i];
         }
@@ -40,7 +40,7 @@ public:
             delete[] ptr_;
             capacity_ = obj.capacity_;
             acctualSize_ = obj.acctualSize_;
-            ptr_ = new T[capacity_];
+            ptr_ = new T[capacity_]{};
             for (size_t i = 0; i < acctualSize_; ++i) {
                 ptr_[i] = obj.ptr_[i];
             }
@@ -78,7 +78,7 @@ public:
     void push_back(const T& obj) {
         if (acctualSize_ == capacity_) {
             capacity_ *= 2;
-            auto tempPtr = new T[capacity_];
+            auto tempPtr = new T[capacity_]{};
             for (size_t i = 0; i < acctualSize_; ++i) {
                 tempPtr[i] = ptr_[i];
             }
@@ -97,7 +97,7 @@ class vector<bool> {
 
 public:
     vector() {
-        ptr_ = new u_int64_t[capacity_];
+        ptr_ = new u_int64_t[capacity_]{};
     };
     vector(const vector& obj){};
     vector(vector&& obj){};
@@ -107,19 +107,18 @@ public:
     void push_back(bool obj) {
         if (acctualSize_ == capacity_ * 64) {
             capacity_ *= 2;
-            auto tempPtr = new u_int64_t[capacity_];
-            for (size_t i = 0; i < acctualSize_; ++i) {
+            auto tempPtr = new u_int64_t[capacity_]{};
+            for (size_t i = 0; i < acctualSize_ / 64; ++i) {
                 tempPtr[i] = ptr_[i];
             }
             delete[] ptr_;
             ptr_ = tempPtr;
         }
         if (obj) {
-            ptr_[acctualSize_] = ptr_[acctualSize_] << 1;
-            ptr_[acctualSize_] |= (1 << 0);
-        } else {
-            ptr_[acctualSize_] = ptr_[acctualSize_] << 1;
+            ptr_[acctualSize_ / 64] = ptr_[acctualSize_ / 64] << 1;
+            ptr_[acctualSize_ / 64] |= (1 << 0);
         }
+        acctualSize_++;
     };
     bool operator[](const size_t& index) {
         return ((ptr_[index / 64] >> (index % 64)) & 1) != 0;
