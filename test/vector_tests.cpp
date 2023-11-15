@@ -95,7 +95,7 @@ TEST(VectorTest, IntCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVectorT
     copiedVector = vector;
     auto value = vector[0];
     auto expected = copiedVector[0];
-    EXPECT_NE(value, expected);
+    EXPECT_EQ(value, expected);
 }
 
 TEST(VectorTest, IntCopyAssignmentOperatorOneAssignToItselfVectorTest) {
