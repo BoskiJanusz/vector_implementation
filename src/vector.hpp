@@ -96,13 +96,33 @@ class vector<bool> {
     size_t capacity_ = 1;
 
 public:
+    class reference{
+        friend class vector<bool>;
+        u_int64_t* referencePtr_ = nullptr;
+        size_t bitIndex_ = 0;
+        reference(u_int64_t* referencePtr, size_t bitIndex) 
+            : referencePtr_(referencePtr), bitIndex_(bitIndex){}
+    public:
+        reference& operator=(bool obj){
+            if(obj){
+                *referencePtr_ |= (1 << bitIndex_);
+            }
+            else{
+                *referencePtr_ &= ~(1 << bitIndex_);
+            }
+            return *this;
+        }
+        operator bool() const {
+        return ((*referencePtr_ >> bitIndex_) & 1) != 0;
+    }
+    };
     vector() {
         ptr_ = new u_int64_t[capacity_]{};
     };
     vector(const vector& obj){};
     vector(vector&& obj){};
     vector& operator=(const vector& obj){};
-    vector& operator=(vector&& obj){};
+    vector& operator=(vector&& obj){};  
     ~vector(){};
     void push_back(bool obj) {
         if (acctualSize_ == capacity_ * 64) {
@@ -120,9 +140,11 @@ public:
         }
         acctualSize_++;
     };
-    bool operator[](const size_t& index) {
-        return ((ptr_[index / 64] >> (index % 64)) & 1) != 0;
+    reference operator[](const size_t& index) {
+        return reference(&ptr_[index / 64], index % 64);
     };
-    bool& at(const size_t& index){};
+    bool& at(const size_t& index){
+        
+    };
 };
 }  // namespace my
