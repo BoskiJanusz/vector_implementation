@@ -119,7 +119,14 @@ public:
     vector() {
         ptr_ = new u_int64_t[capacity_]{};
     };
-    vector(const vector& obj){};
+    vector(const vector& obj){
+        acctualSize_ = obj.acctualSize_;
+        capacity_ = obj.capacity_;
+        ptr_ = new u_int64_t[capacity_]{};
+        for (size_t i = 0; i < acctualSize_; ++i) {
+            ptr_[i] = obj.ptr_[i];
+        }
+    };
     vector(vector&& obj){};
     vector& operator=(const vector& obj){};
     vector& operator=(vector&& obj){};  
