@@ -150,7 +150,16 @@ public:
         }
         return *this;
     };
-    vector& operator=(vector&& obj){};  
+    vector& operator=(vector&& obj){
+        if (this != &obj) {
+            delete[] ptr_;
+            ptr_ = obj.ptr_;
+            capacity_ = obj.capacity_;
+            acctualSize_ = obj.acctualSize_;
+            obj.ptr_ = nullptr;
+        }
+        return *this;
+    };  
     ~vector(){
         delete []ptr_;
     };
