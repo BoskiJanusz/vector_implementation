@@ -135,7 +135,9 @@ public:
     vector(vector&& obj){};
     vector& operator=(const vector& obj){};
     vector& operator=(vector&& obj){};  
-    ~vector(){};
+    ~vector(){
+        delete []ptr_;
+    };
     void push_back(bool obj) {
         if (acctualSize_ == capacity_ * 64) {
             capacity_ *= 2;
