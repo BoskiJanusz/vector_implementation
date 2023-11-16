@@ -117,3 +117,10 @@ TEST(VectorBoolTest, NotInitializetedByValueCopyConstructorTest) {
     auto expected = copiedVector[0];
     EXPECT_EQ(value, expected);
 }
+
+TEST(VectorBoolTest, OneTrueValueIntoVectorConstructorTest) {
+    my::vector<bool> v{1};
+    auto value = v[0];
+    auto expected = true;
+    EXPECT_EQ(value, expected);
+}
