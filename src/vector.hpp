@@ -138,7 +138,18 @@ public:
         ptr_ = obj.ptr_;
         obj.ptr_ = nullptr;
     };
-    vector& operator=(const vector& obj){};
+    vector& operator=(const vector& obj){
+         if (this != &obj) {
+            delete[] ptr_;
+            capacity_ = obj.capacity_;
+            acctualSize_ = obj.acctualSize_;
+            ptr_ = new u_int64_t[capacity_]{};
+            for (size_t i = 0; i < acctualSize_; ++i) {
+                ptr_[i] = obj.ptr_[i];
+            }
+        }
+        return *this;
+    };
     vector& operator=(vector&& obj){};  
     ~vector(){
         delete []ptr_;
