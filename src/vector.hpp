@@ -182,8 +182,11 @@ public:
     reference operator[](const size_t& index) {
         return reference(&ptr_[index / 64], index % 64);
     };
-    bool& at(const size_t& index){
-        
+    reference at(const size_t& index){
+        if (index < acctualSize_) {
+            return reference(&ptr_[index / 64], index % 64);
+        }
+        throw std::out_of_range("Index out of range");
     };
 };
 }  // namespace my
