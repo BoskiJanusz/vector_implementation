@@ -188,5 +188,11 @@ public:
         }
         throw std::out_of_range("Index out of range");
     };
+    reference front() {
+        return reference(&ptr_[0], 0);
+    };
+    reference back() {
+        return reference(&ptr_[acctualSize_ - 1], (acctualSize_ % 64) - 1);
+    };
 };
 }  // namespace my
