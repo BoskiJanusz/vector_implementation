@@ -132,7 +132,12 @@ public:
             ptr_[i] = obj.ptr_[i];
         }
     };
-    vector(vector&& obj){};
+    vector(vector&& obj){
+        acctualSize_ = obj.acctualSize_;
+        capacity_ = obj.capacity_;
+        ptr_ = obj.ptr_;
+        obj.ptr_ = nullptr;
+    };
     vector& operator=(const vector& obj){};
     vector& operator=(vector&& obj){};  
     ~vector(){
