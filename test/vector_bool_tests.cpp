@@ -124,3 +124,11 @@ TEST(VectorBoolTest, OneTrueValueIntoVectorConstructorTest) {
     auto expected = true;
     EXPECT_EQ(value, expected);
 }
+
+TEST(VectorBoolTest, MoveOneValueConstructorTest) {
+    my::vector<bool> vector{1};
+    auto copiedVector{std::move(vector)};
+    auto value = true;
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
