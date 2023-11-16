@@ -133,11 +133,21 @@ TEST(VectorBoolTest, MoveOneValueConstructorTest) {
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorBoolTest, OneVectorValueCopiedToAnotherVectorCopyOperatorTest) {
+TEST(VectorBoolTest, OneVectorValueCopiedToAnotherVectorCopyAssignmentOperatorTest) {
     bool v1 = 1, v2 = 0;
     my::vector<bool> trueVector{v1};
     my::vector<bool> falseVector{v2};
     falseVector = trueVector;
+    auto value = falseVector[0];
+    auto expected = true;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorBoolTest, OneVectorValueMovedToAnotherVectorMoveAssignmentOperatorTest) {
+    bool v1 = 1, v2 = 0;
+    my::vector<bool> trueVector{v1};
+    my::vector<bool> falseVector{v2};
+    falseVector = std::move(trueVector);
     auto value = falseVector[0];
     auto expected = true;
     EXPECT_EQ(value, expected);
