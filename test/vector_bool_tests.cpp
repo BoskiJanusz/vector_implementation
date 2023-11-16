@@ -189,3 +189,65 @@ TEST(VectorBoolTest, OutOfRangeVectorTest) {
     v.push_back(a);
     ASSERT_THROW(v.at(1), std::out_of_range);
 }
+
+TEST(VectorBoolTest, MethodFrontOneTrueValueVectorTest) {
+    my::vector<bool> v{};
+    bool a = 1;
+    v.push_back(a);
+    auto value = v.front();
+    auto expected = true;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorBoolTest, MethodFrontOneFalseValueVectorTest) {
+    my::vector<bool> v{};
+    bool a = 0;
+    v.push_back(a);
+    auto value = v.front();
+    auto expected = false;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorBoolTest, MethodFrontFourValuesVectorTest) {
+    my::vector<bool> v{};
+    bool a = 1;
+    bool b = 0;
+    v.push_back(a);
+    v.push_back(b);
+    v.push_back(b);
+    v.push_back(b);
+    auto value = v.front();
+    auto expected = true;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorBoolTest, MethodBackOneTrueValueVectorTest) {
+    my::vector<bool> v{};
+    bool a = 1;
+    v.push_back(a);
+    auto value = v.back();
+    auto expected = true;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorBoolTest, MethodBackOneFalseValueVectorTest) {
+    my::vector<bool> v{};
+    bool a = 0;
+    v.push_back(a);
+    auto value = v.back();
+    auto expected = false;
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorBoolTest, MethodBackFourValuesVectorTest) {
+    my::vector<bool> v{};
+    bool a = 1;
+    bool b = 0;
+    v.push_back(a);
+    v.push_back(a);
+    v.push_back(a);
+    v.push_back(b);
+    auto value = v.back();
+    auto expected = false;
+    EXPECT_EQ(value, expected);
+}
