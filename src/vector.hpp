@@ -1,5 +1,7 @@
 #pragma once
 
+#define SIZE_OF_MEMORY 64
+
 #include <exception>
 #include <iostream>
 
@@ -164,27 +166,27 @@ public:
         delete []ptr_;
     };
     void push_back(bool obj) {
-        if (acctualSize_ == capacity_ * 64) {
+        if (acctualSize_ == capacity_ * SIZE_OF_MEMORY) {
             capacity_ *= 2;
             auto tempPtr = new u_int64_t[capacity_]{};
-            for (size_t i = 0; i < acctualSize_ / 64; ++i) {
+            for (size_t i = 0; i < acctualSize_ / SIZE_OF_MEMORY; ++i) {
                 tempPtr[i] = ptr_[i];
             }
             delete[] ptr_;
             ptr_ = tempPtr;
         }
         if (obj) {
-            ptr_[acctualSize_ / 64] = ptr_[acctualSize_ / 64] << 1;
-            ptr_[acctualSize_ / 64] |= (1 << 0);
+            ptr_[acctualSize_ / SIZE_OF_MEMORY] = ptr_[acctualSize_ / SIZE_OF_MEMORY] << 1;
+            ptr_[acctualSize_ / SIZE_OF_MEMORY] |= (1 << 0);
         }
         acctualSize_++;
     };
     reference operator[](const size_t& index) {
-        return reference(&ptr_[index / 64], index % 64);
+        return reference(&ptr_[index / SIZE_OF_MEMORY], index % SIZE_OF_MEMORY);
     };
     reference at(const size_t& index){
         if (index < acctualSize_) {
-            return reference(&ptr_[index / 64], index % 64);
+            return reference(&ptr_[index / SIZE_OF_MEMORY], index % SIZE_OF_MEMORY);
         }
         throw std::out_of_range("Index out of range");
     };
@@ -192,7 +194,7 @@ public:
         return reference(&ptr_[0], 0);
     };
     reference back() {
-        return reference(&ptr_[acctualSize_ - 1], (acctualSize_ % 64) - 1);
+        return reference(&ptr_[acctualSize_ - 1], (acctualSize_ % SIZE_OF_MEMORY) - 1);
     };
 };
 }  // namespace my
