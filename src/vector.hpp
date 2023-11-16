@@ -119,6 +119,11 @@ public:
     vector() {
         ptr_ = new u_int64_t[capacity_]{};
     };
+    vector(bool obj) {
+        ptr_ = new u_int64_t[capacity_]{};
+        ptr_[0] = obj;
+        acctualSize_++;
+    }
     vector(const vector& obj){
         acctualSize_ = obj.acctualSize_;
         capacity_ = obj.capacity_;
