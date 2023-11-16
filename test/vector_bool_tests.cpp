@@ -99,3 +99,21 @@ TEST(VectorBoolTest, ReferenceOfAFourBitsVectorTest) {
     auto expected = false;
     EXPECT_EQ(value, expected);
 }
+
+TEST(VectorBoolTest, InitializetedByValueCopyConstructorTest) {
+    my::vector<bool> v{};
+    bool a = 1;
+    v.push_back(a);
+    auto copiedVector{v};
+    auto value = v[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
+
+TEST(VectorBoolTest, NotInitializetedByValueCopyConstructorTest) {
+    my::vector<bool> v{};
+    auto copiedVector{v};
+    auto value = v[0];
+    auto expected = copiedVector[0];
+    EXPECT_EQ(value, expected);
+}
