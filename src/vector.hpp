@@ -14,24 +14,15 @@ private:
     T* capacity_ = nullptr;
 public:
     vector() : begin_(new T[0]{}), end_(begin_), capacity_(begin_) {};
-    vector(const T& obj) {
-        begin_ = new T[1]{};
+    vector(const T& obj) : begin_(new T[1]{}), end_(begin_ + 1), capacity_(begin_ + 1){
         *begin_ = obj;
-        end_ = begin_ + 1;
-        capacity_ = end_;
     }
-    vector(const vector& obj) {
-        begin_ = new T[obj.size()]{};
-        for (size_t i = 0; i < obj.size(); ++i) {
+    vector(const vector& obj) : begin_(new T[obj.size()]{}), end_(begin_ + 1), capacity_(begin_ + obj.capacity()){
+        for (size_t i = 0; i < obj.size(); ++i){
             begin_[i] = obj.begin_[i];
         }
-        end_ = begin_ + 1;
-        capacity_ = begin_ + capacity();        
     };  // copy constructor
-    vector(vector&& obj) {
-        begin_ = obj.begin_;
-        end_ = obj.end_;
-        capacity_ = obj.capacity_;
+    vector(vector&& obj) : begin_(obj.begin_), end_(obj.end_), capacity_(obj.capacity_){
         obj.begin_ = nullptr;
     };  // move constructor
     vector& operator=(const vector& obj) {
@@ -42,7 +33,7 @@ public:
                 begin_[i] = obj.begin_[i];
             }
             end_ = begin_ + 1;
-            capacity_ = begin_ + capacity();  
+            capacity_ = begin_ + obj.capacity();  
         }
         return *this;
     };  // copy assignment operator
@@ -125,27 +116,16 @@ public:
     }
     };
     vector() : begin_(new u_int64_t[0]{}), end_(begin_), capacity_(begin_), acctualSize_(0) {};
-    vector(bool obj) {
-        begin_ = new u_int64_t[1]{};
+    vector(bool obj) : begin_(new u_int64_t[1]{}), end_(begin_ + 1), capacity_(begin_ + 1){
         *begin_ = obj;
-        end_ = begin_ + 1;
-        capacity_ = end_;
         ++acctualSize_;
     }
-    vector(const vector& obj){
-        begin_ = new u_int64_t[obj.size()]{};
+    vector(const vector& obj) : begin_(new u_int64_t[obj.size()]{}), end_(begin_ + 1), capacity_(begin_ + 1), acctualSize_(obj.acctualSize_){
         for (size_t i = 0; i < obj.size(); ++i) {
             begin_[i] = obj.begin_[i];
         }
-        end_ = begin_ + 1;
-        capacity_ = begin_ + capacity();
-        acctualSize_ = obj.acctualSize_;
     };
-    vector(vector&& obj){
-        begin_ = obj.begin_;
-        end_ = obj.end_;
-        capacity_ = obj.capacity_;
-        acctualSize_ = obj.acctualSize_;
+    vector(vector&& obj) : begin_(obj.begin_), end_(obj.end_), capacity_(obj.capacity_), acctualSize_(obj.acctualSize_){
         obj.begin_ = nullptr;
     };
     vector& operator=(const vector& obj){
