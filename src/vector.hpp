@@ -9,94 +9,100 @@ namespace my {
 template <class T>
 class vector {
 private:
-    T* ptr_ = nullptr;
-    size_t acctualSize_ = 0;
-    size_t capacity_ = 1;
-
+    T* begin_ = nullptr;
+    T* end_ = nullptr;
+    T* capacity_ = nullptr;
 public:
-    vector() {
-        ptr_ = new T[capacity_]{};
-    };
-
+    vector() : begin_(new T[0]{}), end_(begin_), capacity_(begin_) {};
     vector(const T& obj) {
-        ptr_ = new T[capacity_]{};
-        ptr_[0] = obj;
-        acctualSize_++;
+        begin_ = new T[1]{};
+        *begin_ = obj;
+        end_ = begin_ + 1;
+        capacity_ = end_;
     }
     vector(const vector& obj) {
-        acctualSize_ = obj.acctualSize_;
-        capacity_ = obj.capacity_;
-        ptr_ = new T[capacity_]{};
-        for (size_t i = 0; i < acctualSize_; ++i) {
-            ptr_[i] = obj.ptr_[i];
+        begin_ = new T[obj.size()]{};
+        for (size_t i = 0; i < obj.size(); ++i) {
+            begin_[i] = obj.begin_[i];
         }
+        end_ = begin_ + 1;
+        capacity_ = begin_ + capacity();        
     };  // copy constructor
     vector(vector&& obj) {
-        acctualSize_ = obj.acctualSize_;
+        begin_ = obj.begin_;
+        end_ = obj.end_;
         capacity_ = obj.capacity_;
-        ptr_ = obj.ptr_;
-        obj.ptr_ = nullptr;
+        obj.begin_ = nullptr;
     };  // move constructor
     vector& operator=(const vector& obj) {
         if (this != &obj) {
-            delete[] ptr_;
-            capacity_ = obj.capacity_;
-            acctualSize_ = obj.acctualSize_;
-            ptr_ = new T[capacity_]{};
-            for (size_t i = 0; i < acctualSize_; ++i) {
-                ptr_[i] = obj.ptr_[i];
+            delete[] begin_;
+            begin_ = new T[obj.size()]{};
+            for (size_t i = 0; i < obj.size(); ++i) {
+                begin_[i] = obj.begin_[i];
             }
+            end_ = begin_ + 1;
+            capacity_ = begin_ + capacity();  
         }
         return *this;
     };  // copy assignment operator
     vector& operator=(vector&& obj) {
         if (this != &obj) {
-            delete[] ptr_;
-            ptr_ = obj.ptr_;
+            delete[] begin_;
+            begin_ = obj.begin_;
+            end_ = obj.end_;
             capacity_ = obj.capacity_;
-            acctualSize_ = obj.acctualSize_;
-            obj.ptr_ = nullptr;
+            obj.begin_ = nullptr;
         }
         return *this;
     };  // move assignment operator
     ~vector() {
-        delete[] ptr_;
+        delete[] begin_;
     };  // destructor
     T& operator[](const size_t& index) {
-        return ptr_[index];
+        return begin_[index];
     };
+    size_t size() const{
+        return (end_ - begin_);
+    }
+    size_t capacity() const{
+        return (capacity_ - begin_);
+    }
     T& at(const size_t& index) {
-        if (index < acctualSize_) {
-            return ptr_[index];
+        if (index < size()) {
+            return begin_[index];
         }
         throw std::out_of_range("Index out of range");
     };
     T& front() {
-        return ptr_[0];
+        return *begin_;
     };
     T& back() {
-        return ptr_[acctualSize_ - 1];
+        return *(end_ - 1);
     };
     void push_back(const T& obj) {
-        if (acctualSize_ == capacity_) {
-            capacity_ *= 2;
-            auto tempPtr = new T[capacity_]{};
-            for (size_t i = 0; i < acctualSize_; ++i) {
-                tempPtr[i] = ptr_[i];
+        if (size() == capacity()) {
+            auto newCapacity = capacity() == 0 ? 1 : capacity() * 2;
+            auto tempPtr = new T[newCapacity]{};
+            size_t oldSize = size();
+            for (size_t i = 0; i < oldSize; ++i) {
+                tempPtr[i] = begin_[i];
             }
-            delete[] ptr_;
-            ptr_ = tempPtr;
+            delete[] begin_;
+            begin_ = tempPtr;
+            end_ = begin_ + oldSize;
+            capacity_ = begin_ + newCapacity;
         }
-        ptr_[acctualSize_] = obj;
-        acctualSize_++;
+        begin_[size()] = obj;
+        ++end_;
     };  // push_back function
 };
 template <>
 class vector<bool> {
-    u_int64_t* ptr_ = nullptr;
-    size_t acctualSize_ = 0;
-    size_t capacity_ = 1;
-
+    u_int64_t* begin_ = nullptr;
+    u_int64_t* end_ = nullptr;
+    u_int64_t* capacity_ = nullptr;
+    u_int64_t acctualSize_ = 0;
 public:
     class reference{
         friend class vector<bool>;
@@ -118,83 +124,92 @@ public:
         return ((*referencePtr_ >> bitIndex_) & 1) != 0;
     }
     };
-    vector() {
-        ptr_ = new u_int64_t[capacity_]{};
-    };
+    vector() : begin_(new u_int64_t[0]{}), end_(begin_), capacity_(begin_), acctualSize_(0) {};
     vector(bool obj) {
-        ptr_ = new u_int64_t[capacity_]{};
-        ptr_[0] = obj;
-        acctualSize_++;
+        begin_ = new u_int64_t[1]{};
+        *begin_ = obj;
+        end_ = begin_ + 1;
+        capacity_ = end_;
+        ++acctualSize_;
     }
     vector(const vector& obj){
-        acctualSize_ = obj.acctualSize_;
-        capacity_ = obj.capacity_;
-        ptr_ = new u_int64_t[capacity_]{};
-        for (size_t i = 0; i < acctualSize_; ++i) {
-            ptr_[i] = obj.ptr_[i];
+        begin_ = new u_int64_t[obj.size()]{};
+        for (size_t i = 0; i < obj.size(); ++i) {
+            begin_[i] = obj.begin_[i];
         }
+        end_ = begin_ + 1;
+        capacity_ = begin_ + capacity();
+        acctualSize_ = obj.acctualSize_;
     };
     vector(vector&& obj){
-        acctualSize_ = obj.acctualSize_;
+        begin_ = obj.begin_;
+        end_ = obj.end_;
         capacity_ = obj.capacity_;
-        ptr_ = obj.ptr_;
-        obj.ptr_ = nullptr;
+        acctualSize_ = obj.acctualSize_;
+        obj.begin_ = nullptr;
     };
     vector& operator=(const vector& obj){
          if (this != &obj) {
-            delete[] ptr_;
-            capacity_ = obj.capacity_;
-            acctualSize_ = obj.acctualSize_;
-            ptr_ = new u_int64_t[capacity_]{};
-            for (size_t i = 0; i < acctualSize_; ++i) {
-                ptr_[i] = obj.ptr_[i];
+            delete[] begin_;
+            begin_ = new u_int64_t[obj.size()]{};
+            for (size_t i = 0; i < obj.size(); ++i) {
+                begin_[i] = obj.begin_[i];
             }
+            end_ = begin_ + 1;
+            capacity_ = begin_ + capacity();
+            acctualSize_ = obj.acctualSize_;
         }
         return *this;
     };
     vector& operator=(vector&& obj){
         if (this != &obj) {
-            delete[] ptr_;
-            ptr_ = obj.ptr_;
+            delete[] begin_;
+            begin_ = obj.begin_;
+            end_ = obj.end_;
             capacity_ = obj.capacity_;
             acctualSize_ = obj.acctualSize_;
-            obj.ptr_ = nullptr;
+            obj.begin_ = nullptr;
         }
         return *this;
     };  
     ~vector(){
-        delete []ptr_;
+        delete []begin_;
     };
     void push_back(bool obj) {
-        if (acctualSize_ == capacity_ * SIZE_OF_MEMORY) {
-            capacity_ *= 2;
-            auto tempPtr = new u_int64_t[capacity_]{};
+        if (acctualSize_ == capacity() * SIZE_OF_MEMORY) {
+            auto tempPtr = new u_int64_t[capacity() * 2]{};
             for (size_t i = 0; i < acctualSize_ / SIZE_OF_MEMORY; ++i) {
-                tempPtr[i] = ptr_[i];
+                tempPtr[i] = begin_[i];
             }
-            delete[] ptr_;
-            ptr_ = tempPtr;
+            delete[] begin_;
+            begin_ = tempPtr;
         }
         if (obj) {
-            ptr_[acctualSize_ / SIZE_OF_MEMORY] = ptr_[acctualSize_ / SIZE_OF_MEMORY] << 1;
-            ptr_[acctualSize_ / SIZE_OF_MEMORY] |= (1 << 0);
+            begin_[acctualSize_ / SIZE_OF_MEMORY] = begin_[acctualSize_ / SIZE_OF_MEMORY] << 1;
+            begin_[acctualSize_ / SIZE_OF_MEMORY] |= (1 << 0);
         }
         acctualSize_++;
     };
+    size_t size() const{
+            return acctualSize_;
+    }
+    size_t capacity() const{
+        return (capacity_ - begin_);
+    }
     reference operator[](const size_t& index) {
-        return reference(&ptr_[index / SIZE_OF_MEMORY], index % SIZE_OF_MEMORY);
+        return reference(&begin_[index / SIZE_OF_MEMORY], index % SIZE_OF_MEMORY);
     };
     reference at(const size_t& index){
         if (index < acctualSize_) {
-            return reference(&ptr_[index / SIZE_OF_MEMORY], index % SIZE_OF_MEMORY);
+            return reference(&begin_[index / SIZE_OF_MEMORY], index % SIZE_OF_MEMORY);
         }
         throw std::out_of_range("Index out of range");
     };
     reference front() {
-        return reference(&ptr_[0], 0);
+        return reference(&begin_[0], 0);
     };
     reference back() {
-        return reference(&ptr_[acctualSize_ - 1], (acctualSize_ % SIZE_OF_MEMORY) - 1);
+        return reference(&begin_[acctualSize_ - 1], (acctualSize_ % SIZE_OF_MEMORY) - 1);
     };
 };
 }  // namespace my
