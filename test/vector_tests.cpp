@@ -90,7 +90,7 @@ TEST(VectorTest, StringCopyConstructorTest) {
 }
 
 TEST(VectorTest, IntCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVectorTest) {
-    my::vector<int> vector{};
+    my::vector<int> vector{1};
     my::vector<int> copiedVector{};
     copiedVector = vector;
     auto value = vector[0];
@@ -126,8 +126,8 @@ TEST(VectorTest, IntCopyAssignmentOperatorOneAssignNonEmptyVectorTest) {
     EXPECT_EQ(value, expected);
 }
 
-TEST(VectorTest, CharCopyAssignmentOperatorOneAssignEmptyToEmptyIsNotEqualVectorTest) {
-    my::vector<char> vector{};
+TEST(VectorTest, CharCopyAssignmentOperatorOneAssignEmptyToNonEmptyIsNotEqualVectorTest) {
+    my::vector<char> vector{'a'};
     my::vector<char> copiedVector{};
     copiedVector = vector;
     auto value = vector[0];
