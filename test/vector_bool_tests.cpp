@@ -47,7 +47,7 @@ TEST(VectorBoolTest, FourTrueValuesIntoVectorFifthIsEqualZeroTest) {
 TEST(VectorBoolTest, FillOneTableWithValuesLastBitIsEqualOneTest) {
     my::vector<bool> v{};
     bool a = 1;
-    for(size_t i = 0; i < 64; i++){
+    for (size_t i = 0; i < 64; i++) {
         v.push_back(a);
     }
     auto value = v[63];
@@ -58,7 +58,7 @@ TEST(VectorBoolTest, FillOneTableWithValuesLastBitIsEqualOneTest) {
 TEST(VectorBoolTest, ArrayOfTwoElementsSecondBitOfFirstElementIsEqualOneTest) {
     my::vector<bool> v{};
     bool a = 1;
-    for(size_t i = 0; i < 65; i++){
+    for (size_t i = 0; i < 65; i++) {
         v.push_back(a);
     }
     auto value = v[64];
@@ -69,7 +69,7 @@ TEST(VectorBoolTest, ArrayOfTwoElementsSecondBitOfFirstElementIsEqualOneTest) {
 TEST(VectorBoolTest, ArrayOfTwoElementsSecondBitOfSecondElementIsEqualZeroTest) {
     my::vector<bool> v{};
     bool a = 1;
-    for(size_t i = 0; i < 65; i++){
+    for (size_t i = 0; i < 65; i++) {
         v.push_back(a);
     }
     auto value = v[65];
